@@ -88,7 +88,7 @@ pod:
   annotations:
     POD_ANNOTATION: test_value
   nodeSelector:
-    node-role.kubernetes.io/workflow: ""
+    kubernetes.io/os: linux
   tolerations:
     - key: workflow-runner
       operator: Exists
@@ -110,6 +110,7 @@ ports:
     enabled: true
     port: 8083
     containerPort: 8081
+    protocol: TCP
 
 service:
   type: ClusterIP
