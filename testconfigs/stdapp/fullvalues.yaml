@@ -36,7 +36,7 @@ deployment:
       topologyKey: kubernetes.io/hostname
       whenUnsatisfiable: ScheduleAnyway
       matchLabelKeys:
-      - "app.kubernetes.io/version"
+        - "app.kubernetes.io/version"
 
 disruptionPolicy:
   enabled: true
@@ -47,15 +47,15 @@ container:
   command: ["/docker-entrypoint.sh"]
   args: ["nginx", "-g", "daemon off;"]
   env:
-  - name: CUSTOM_ENV
-    value: custom_value
+    - name: CUSTOM_ENV
+      value: custom_value
 
   image:
     repository: "nginx"
     pullPolicy: IfNotPresent
     tag: "1.29.0"
     #pullSecret: "some-secret"
-  
+
   resources:
     limits:
       cpu: 100m
@@ -75,7 +75,6 @@ container:
       add:
         - "NET_BIND_SERVICE"
 
-
 autoscaling:
   enabled: true
   minReplicas: 2
@@ -88,7 +87,12 @@ pod:
     POD_LABEL: test_value
   annotations:
     POD_ANNOTATION: test_value
-
+  nodeSelector:
+    kubernetes.io/os: linux
+  tolerations:
+    - key: workflow-runner
+      operator: Exists
+      effect: NoSchedule
 
 securityContext:
   fsGroup: 6000
@@ -106,6 +110,7 @@ ports:
     enabled: true
     port: 8083
     containerPort: 8081
+    protocol: TCP
 
 service:
   type: ClusterIP
@@ -117,8 +122,8 @@ probes:
     path: /health
     port: http
     httpHeaders:
-    - name: testheader
-      value: test
+      - name: testheader
+        value: test
     initialDelaySeconds: 10
     periodSeconds: 10
     timeoutSeconds: 1
