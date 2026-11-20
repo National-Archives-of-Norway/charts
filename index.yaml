@@ -2,6 +2,15 @@ apiVersion: v1
 entries:
   stdapp:
   - apiVersion: v2
+    created: "2026-11-20T18:08:26.183100096Z"
+    description: A generic opinionated standard configuration for kubernetes deployments
+    digest: a1dae423d996fabe340d2bcf3d42e0944a14559b8f3cfb70fa776189ff55a724
+    name: stdapp
+    type: application
+    urls:
+    - https://github.com/National-Archives-of-Norway/charts/releases/download/stdapp-0.0.10/stdapp-0.0.10.tgz
+    version: 0.0.10
+  - apiVersion: v2
     created: "2026-11-20T18:07:30.485103345Z"
     description: A generic opinionated standard configuration for kubernetes deployments
     digest: 5a755236560ed743ce51d80bd79d7549b7a2e585e827316a0bfa692c82db86e8
@@ -64,4 +73,4 @@ entries:
     urls:
     - https://github.com/tokheim/charts/releases/download/stdapp-0.0.3/stdapp-0.0.3.tgz
     version: 0.0.3
-generated: "2026-11-20T18:07:30.485122315Z"
+generated: "2026-11-20T18:08:26.183125034Z"
