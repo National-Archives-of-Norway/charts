@@ -7,6 +7,9 @@
         - "**"
         - "!gh-pages"
         - "!main"
+      paths:
+        - 'helm/**'
+        - 'testconfigs/**'
 
   jobs:
     test-chart:
