@@ -7,18 +7,24 @@
         - "**"
         - "!gh-pages"
         - "!main"
+      paths:
+        - 'debug-charts.sh'
+        - 'helm/**'
+        - 'testconfigs/**'
+        - 'test-charts.sh'
+        
 
   jobs:
     test-chart:
       runs-on: ubuntu-latest
       steps:
         - name: Checkout
-          uses: actions/checkout@v6.0.2
+          uses: actions/checkout@v7.0.1
         - name: Start Minikube
           id: minikube
           uses: medyagh/setup-minikube@latest
         - name: Setup helm
-          uses: azure/setup-helm@v5.0.0
+          uses: azure/setup-helm@v5.1.0
           with:
             version: 'latest'
           id: install
