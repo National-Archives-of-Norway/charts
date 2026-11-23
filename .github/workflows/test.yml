@@ -7,6 +7,12 @@
         - "**"
         - "!gh-pages"
         - "!main"
+      paths:
+        - 'debug-charts.sh'
+        - 'helm/**'
+        - 'testconfigs/**'
+        - 'test-charts.sh'
+        
 
   jobs:
     test-chart:
