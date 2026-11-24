@@ -49,7 +49,7 @@ deployment:
 
       # Default balances within a specific release version
       matchLabelKeys:
-      - "app.kubernetes.io/version"
+        - "app.kubernetes.io/version"
 
 # pod availability during cluster maintenance
 disruptionPolicy:
@@ -70,7 +70,7 @@ container:
     pullPolicy: IfNotPresent
     tag: latest
     pullSecret: ""
-  
+
   resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
@@ -100,7 +100,6 @@ container:
         - ALL
       add: []
 
-
 autoscaling:
   enabled: false
   minReplicas: 2
@@ -112,18 +111,18 @@ autoscaling:
     scaleDown:
       stabilizationWindowSeconds: 300
       policies:
-      - type: Percent
-        value: 50
-        periodSeconds: 300
+        - type: Percent
+          value: 50
+          periodSeconds: 300
     scaleUp:
       stabilizationWindowSeconds: 30
       policies:
-      - type: Percent
-        value: 100
-        periodSeconds: 300
-      - type: Pods
-        value: 4
-        periodSeconds: 300
+        - type: Percent
+          value: 100
+          periodSeconds: 300
+        - type: Pods
+          value: 4
+          periodSeconds: 300
       selectPolicy: Max
 
   targetCPU: 80
@@ -132,7 +131,15 @@ autoscaling:
 pod:
   labels: {}
   annotations: {}
-
+  # -- Node labels the pod must match to be scheduled on a node.
+  # Example: `{node-role.kubernetes.io/workflow: ""}`
+  nodeSelector: {}
+  # -- Tolerations allowing the pod to be scheduled on nodes with matching taints.
+  # Example: `[{key: workflow-runner, operator: Exists, effect: NoSchedule}]`
+  tolerations: []
+  # -- Name of an existing PriorityClass in the cluster. Affects scheduling order and preemption.
+  # Example: 'workflow-priority'
+  priorityClassName: ""
 
 # security context defaults for entire pod
 securityContext:
@@ -222,7 +229,7 @@ vaultAgent:
     roleFromNamespace:
       enabeld: false
       key: "role"
-      template: '{{ .Release.Namespace }}'
+      template: "{{ .Release.Namespace }}"
     clusterAuthPath:
       enabled: false
       key: "auth-path"
@@ -249,8 +256,8 @@ vault:
       enabled: False
       path: "some/vault/obj"
       envKeys:
-      - envName: SOME_PARAM
-        vaultKey: name_in_vault
+        - envName: SOME_PARAM
+          vaultKey: name_in_vault
       # override defaults like
       # rolloutRestart: False
       # mount: "y"
@@ -258,8 +265,8 @@ vault:
       enabled: False
       globalName: shared-secret
       envKeys:
-      - envName: SHARED_PARAM
-        vaultKey: name_in_vault
+        - envName: SHARED_PARAM
+          vaultKey: name_in_vault
 
 serviceAccount:
   enabled: False
